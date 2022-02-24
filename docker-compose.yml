@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  php-apache-environment:
+  m133-web:
     container_name: m133-web
     image: php:8.0-apache
     restart: unless-stopped
@@ -19,7 +19,10 @@ services:
       - "traefik.http.routers.m133.entrypoints=websecure"
       - "traefik.http.routers.m133.rule=Host(`m133.ipoac.ch`)"
       - "traefik.http.routers.m133.middlewares=secHeaders@file"
-      - "traefik.http.routers.m133.service=vaultwarden"
+      - "traefik.http.routers.m133.service=m133"
       - "traefik.http.routers.m133.tls=true"
       - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
       - "traefik.http.services.m133.loadbalancer.server.port=80"
+networks:
+  proxy:
+    external: true
