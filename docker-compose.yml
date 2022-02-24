@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: m133-web
+    image: php:8.0-apache
+    restart: unless-stopped
+    volumes:
+      - /srv/testing/m133/HTML/:/var/www/html/
+    networks:
+      - proxy
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.m133-redirect.entrypoints=web"
+      - "traefik.http.routers.m133-redirect.rule=Host(`m133.ipoac.ch`)"
+      - "traefik.http.routers.m133-redirect.middlewares=https-redirect@file"      
+      - "traefik.http.routers.m133-redirect.service=no-where@file"
+      - "traefik.http.routers.m133.entrypoints=websecure"
+      - "traefik.http.routers.m133.rule=Host(`m133.ipoac.ch`)"
+      - "traefik.http.routers.m133.middlewares=secHeaders@file"
+      - "traefik.http.routers.m133.service=vaultwarden"
+      - "traefik.http.routers.m133.tls=true"
+      - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
+      - "traefik.http.services.m133.loadbalancer.server.port=80"
