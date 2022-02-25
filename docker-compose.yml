@@ -8,7 +8,7 @@ services:
       - m133-db
     volumes:
       - /srv/testing/m133/HTML/:/var/www/html/
-      - /srv/testing/m133/conf/httpd/:/etc/apache2/
+      #- /srv/testing/m133/conf/httpd/:/etc/apache2/
       - /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
       - /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
