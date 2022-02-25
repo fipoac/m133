@@ -8,9 +8,10 @@ services:
       - m133-db
     volumes:
       - /srv/testing/m133/HTML/:/var/www/html/
-      - /srv/testing/m133/conf/httpd/:/etc/httpd/
+      - /srv/testing/m133/conf/httpd/:/etc/apache2/
       - /srv/testing/m133/conf/php.d/:/etc/php.d/
-      - /srv/testing/m133-logs/httpd/:/var/log/httpd/
+      - /srv/testing/m133/conf/php.ini:/etc/php.ini
+      - /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
       - proxy
       - m133_backend
