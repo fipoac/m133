@@ -10,7 +10,7 @@ services:
       - /srv/testing/m133/HTML/:/var/www/html/
       - /srv/testing/m133/conf/httpd/:/etc/apache2/
       - /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
-      - /srv/testing/m133-logs/httpd/:/var/log/apache2/:ro
+      - /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
       - proxy
       - m133_backend
@@ -39,8 +39,8 @@ services:
     image: mariadb:latest
     restart: unless-stopped
     volumes:
-      - /srv/testing/m133-data/mysql/:/var/lib/mysql/:ro
-      - /srv/testing/m133-logs/mysql/:/var/log/mysql/:ro
+      - /srv/testing/m133-data/mysql/:/var/lib/mysql/
+      - /srv/testing/m133-logs/mysql/:/var/log/mysql/
       - /srv/testing/m133/conf/mysql/:/etc/mysql/
     networks:
       - m133_backend
