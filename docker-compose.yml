@@ -4,12 +4,20 @@ services:
     container_name: m133-web
     image: php:8.0-apache
     restart: unless-stopped
+    depends_on:
+      - m133-db
     volumes:
       - /srv/testing/m133/HTML/:/var/www/html/
+      - /srv/testing/m133/conf/httpd/:/etc/httpd/
+      - /srv/testing/m133/conf/php.d/:/etc/php.d/
+      - /srv/testing/m133-logs/httpd/:/var/log/httpd/
     networks:
       - proxy
+      - m133_backend
     expose:
       - "80"
+    links:
+      - m133-db
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.m133-redirect.entrypoints=web"
@@ -23,6 +31,23 @@ services:
       - "traefik.http.routers.m133.tls=true"
       - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
       - "traefik.http.services.m133.loadbalancer.server.port=80"
+  m133-db:
+    container_name: m133-db
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - /srv/testing/m133-data/mysql/:/var/lib/mysql/
+      - /srv/testing/m133-logs/mysql/:/var/log/mysql/
+      - /srv/testing/m133/conf/mysql/:/etc/mysql/
+    networks:
+      - m133_backend
+    environment:
+      - MYSQL_ROOT_PASSWORD= "${MYSQL_ROOT_PASSWORD}"
+      - MYSQL_DATABASE=m133
+      - MYSQL_USER=m133
+      - MYSQL_PASSWORD= "${MYSQL_PASSWORD}"
 networks:
   proxy:
     external: true
+  m133_backend:
+    external: false
