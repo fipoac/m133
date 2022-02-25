@@ -9,9 +9,8 @@ services:
     volumes:
       - /srv/testing/m133/HTML/:/var/www/html/
       - /srv/testing/m133/conf/httpd/:/etc/apache2/
-      - /srv/testing/m133/conf/php.d/:/etc/php.d/
-      - /srv/testing/m133/conf/php.ini:/etc/php.ini
-      - /srv/testing/m133-logs/httpd/:/var/log/apache2/
+      - /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
+      - /srv/testing/m133-logs/httpd/:/var/log/apache2/:ro
     networks:
       - proxy
       - m133_backend
@@ -32,21 +31,24 @@ services:
       - "traefik.http.routers.m133.tls=true"
       - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
       - "traefik.http.services.m133.loadbalancer.server.port=80"
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   m133-db:
     container_name: m133-db
     image: mariadb:latest
     restart: unless-stopped
     volumes:
-      - /srv/testing/m133-data/mysql/:/var/lib/mysql/
-      - /srv/testing/m133-logs/mysql/:/var/log/mysql/
+      - /srv/testing/m133-data/mysql/:/var/lib/mysql/:ro
+      - /srv/testing/m133-logs/mysql/:/var/log/mysql/:ro
       - /srv/testing/m133/conf/mysql/:/etc/mysql/
     networks:
       - m133_backend
     environment:
-      - MYSQL_ROOT_PASSWORD= "${MYSQL_ROOT_PASSWORD}"
-      - MYSQL_DATABASE=m133
-      - MYSQL_USER=m133
-      - MYSQL_PASSWORD= "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: m133
+      MYSQL_USER: m133
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
   proxy:
     external: true
