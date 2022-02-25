@@ -16,8 +16,6 @@ services:
       - m133_backend
     expose:
       - "80"
-    links:
-      - m133-db
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.m133-redirect.entrypoints=web"
@@ -44,6 +42,8 @@ services:
       - /srv/testing/m133/conf/mysql/:/etc/mysql/
     networks:
       - m133_backend
+    expose:
+      - "3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: m133
