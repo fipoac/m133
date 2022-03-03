@@ -398,12 +398,13 @@ jQuery(document).ready(function($) {
 	/************************************
    		Count down for coming soon
 	*************************************/
-   $('#countdown').countdown('2020/10/10', function(event) {
+   $('#countdown').countdown('2022/05/05', function(event) {
 	  var $this = $(this).html(event.strftime(''
-	    + '<div class="countdown-number"><b>%d</b><p>days</p></div> '
-	    + '<div class="countdown-number"><b>%H</b><p>hr</p></div> '
-	    + '<div class="countdown-number"><b>%M</b><p>min</p></div> '
-	    + '<div class="countdown-number"><b>%S</b><p>sec</p></div>'));
+	    + '<div class="countdown-number"><b>%w</b><p>Wo</p></div> '
+	    + '<div class="countdown-number"><b>%d</b><p>Tg</p></div> '
+	    + '<div class="countdown-number"><b>%H</b><p>Std</p></div> '
+	    + '<div class="countdown-number"><b>%M</b><p>Min</p></div> '
+	    + '<div class="countdown-number"><b>%S</b><p>Sek</p></div>'));
 	});
 
 });
