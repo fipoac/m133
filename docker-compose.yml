@@ -2,15 +2,15 @@ version: '3.8'
 services:
   m133-web:
     container_name: m133-web
-    image: php:8.0-apache
+    image: "php:${PHP_VERSION}-apache"
     restart: unless-stopped
     depends_on:
       - m133-db
     volumes:
-      - /srv/testing/m133/HTML/:/var/www/html/
+      - ./HTML/:/var/www/html/
       #- /srv/testing/m133/conf/httpd/:/etc/apache2/
-      - /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
-      - /srv/testing/m133-logs/httpd/:/var/log/apache2/
+      #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
+      #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
       - proxy
       - m133_backend
@@ -34,22 +34,27 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   m133-db:
     container_name: m133-db
-    image: mariadb:latest
-    restart: unless-stopped
+    image: "mariadb:${MARIADB_VERSION}"
+    restart: always
     volumes:
-      - /srv/testing/m133-data/mysql/:/var/lib/mysql/
-      - /srv/testing/m133-logs/mysql/:/var/log/mysql/
-      - /srv/testing/m133/conf/mysql/:/etc/mysql/
+      - "./data/mysql/:${MARIADB_DATA_DIR}"
+      - ./conf/mysql/:/etc/mysql/
     networks:
       - m133_backend
     expose:
       - "3306"
+    command:
+      - "--aria-log-dir-path=${MARIADB_DATA_DIR}"
+      - "--datadir=${MARIADB_DATA_DIR}"
     environment:
+      TZ: "Europe/Zurich"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: m133
       MYSQL_USER: m133
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
-  proxy:
-    external: true
+  m133_frontend:
+    name: proxy
   m133_backend:
+    internal: true
