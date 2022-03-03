@@ -12,7 +12,7 @@ services:
       #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
       #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
-      - proxy
+      - m133_frontend
       - m133_backend
     expose:
       - "80"
