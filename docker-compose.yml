@@ -35,6 +35,7 @@ services:
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
   m133-db:
     container_name: m133-db
     image: "mariadb:${MARIADB_VERSION}"
@@ -60,4 +61,3 @@ networks:
   m133_frontend:
     name: proxy
   m133_backend:
-    internal: true
