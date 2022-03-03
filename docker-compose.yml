@@ -38,6 +38,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: "m133-db"
 
   m133-db:
     container_name: m133-db
