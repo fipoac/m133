@@ -24,7 +24,7 @@ services:
       - "traefik.http.routers.m133-redirect.entrypoints=web"
       - "traefik.http.routers.m133-redirect.rule=Host(`m133.ipoac.ch`)"
       - "traefik.http.routers.m133-redirect.middlewares=https-redirect@file"      
-      - "traefik.http.routers.m133-redirect.service=no-where@file"
+      - "traefik.http.routers.m133-redirect.service=noop@internal"
       - "traefik.http.routers.m133.entrypoints=websecure"
       - "traefik.http.routers.m133.rule=Host(`m133.ipoac.ch`)"
       - "traefik.http.routers.m133.middlewares=secHeaders@file"
@@ -35,6 +35,8 @@ services:
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   m133-db:
     container_name: m133-db
@@ -54,10 +56,11 @@ services:
       TZ: "Europe/Zurich"
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: m133
-      MYSQL_USER: m133
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
   m133_frontend:
     name: proxy
   m133_backend:
+    external: false
