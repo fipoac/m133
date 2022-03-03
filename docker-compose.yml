@@ -15,8 +15,8 @@ services:
       #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
       #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
-      - m133_frontend
-      - m133_backend
+      - frontend
+      - backend
     expose:
       - "80"
     labels:
@@ -46,7 +46,7 @@ services:
       - "./data/mysql/:${MARIADB_DATA_DIR}"
       - ./conf/mysql/:/etc/mysql/
     networks:
-      - m133_backend
+      - backend
     expose:
       - "3306"
     command:
@@ -60,7 +60,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
-  m133_frontend:
-    name: proxy
-  m133_backend:
+  frontend:
+    name: traefik_proxy
+    external: true
+  backend:
     external: false
