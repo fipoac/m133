@@ -2,20 +2,16 @@
 //These are the defined authentication environment in the db service
 
 // The MySQL service named in the docker-compose.yml.
-$host = 'm133-db';
+$host = $_ENV['MYSQL_DATABASE'];
 
 // Database use name
-$user = 'MYSQL_USER';
+$user = $_ENV['MYSQL_USER'];
 
 //database user password
-$pass = 'MYSQL_PASSWORD';
-
-$database = 'm133';
-
-$port = '3306';
+$pass = $_ENV['MYSQL_PASSWORD'];
 
 // check the MySQL connection status
-$conn = new mysqli($host, $user, $pass, $database, $port);
+$conn = new mysqli($host, $user, $pass);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {

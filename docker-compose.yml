@@ -15,7 +15,7 @@ services:
       #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
       #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
-      - frontend
+      - traefik
       - backend
     expose:
       - "80"
@@ -32,9 +32,10 @@ services:
       - "traefik.http.routers.m133.tls=true"
       - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
       - "traefik.http.services.m133.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
 
@@ -60,8 +61,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
-  frontend:
-    name: traefik_proxy
+  traefik:
     external: true
   backend:
     external: false
