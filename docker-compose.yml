@@ -3,8 +3,8 @@ services:
   m133-web:
     container_name: m133-web
     build:
-            context: ./image
-            dockerfile: dockerfile
+      context: ./image
+      dockerfile: Dockerfile
     #image: "php:${PHP_VERSION}-apache"
     restart: unless-stopped
     depends_on:
