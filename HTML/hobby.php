@@ -59,8 +59,8 @@
       <section class="hobby-db">
           <div>
             <?php
-            $name = "Florian";
-            echo "Hello World!";
+            $name = "Nico";
+            echo "Hello World! ";
             ?>
 
           </div>
