@@ -77,9 +77,17 @@ try {
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   echo "Connected successfully";
+  $sql = "CREATE TABLE IF NOT EXISTS hobby (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    hobby VARCHAR(30) NOT NULL
+    )";
+  $conn->exec($sql);
+  echo "Table MyGuests created successfully";
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
+
+
             ?>
 
           </div>
