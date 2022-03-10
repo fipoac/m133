@@ -57,10 +57,29 @@
         </div>
       </header><!--End header-->
       <section class="hobby-db">
-          <div>
+          <div class="container">
             <?php
-            $name = "Nico";
-            echo "Hello World! ";
+
+// The MySQL service named in the docker-compose.yml.
+$host = $_ENV['MYSQL_HOST'];
+
+// database user name
+$user = $_ENV['MYSQL_USER'];
+
+// database user password
+$pass = $_ENV['MYSQL_PASSWORD'];
+
+// database name
+$db = $_ENV['MYSQL_DATABASE']
+
+try {
+  $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
             ?>
 
           </div>
