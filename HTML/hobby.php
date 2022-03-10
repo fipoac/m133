@@ -70,7 +70,7 @@ $user = $_ENV['MYSQL_USER'];
 $pass = $_ENV['MYSQL_PASSWORD'];
 
 // database name
-$db = $_ENV['MYSQL_DATABASE']
+$db = $_ENV['MYSQL_DATABASE'];
 
 try {
   $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
