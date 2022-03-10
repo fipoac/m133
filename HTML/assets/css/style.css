@@ -181,6 +181,9 @@ header {
     transition: .4s ease; }
     header .header-wrapper .logo {
       display: inline-block; }
+    header .header-wrapper #logo-svg {
+      height: 52px;
+    }
     header .header-wrapper .mobile-menu {
       display: none;
       text-align: right; }
@@ -325,22 +328,27 @@ header {
             margin-left: 0; }
           header .header-wrapper .menu-function .social-contact a:last-child {
             margin-right: 0; }
-      header .header-wrapper .menu-function #cart {
+      header .header-wrapper .menu-function #cart,
+      header .header-wrapper .menu-function #account {
         font-size: 16px;
         color: #1d2c44;
         line-height: 1;
         display: inline-block;
         transition: 0.3s ease;
         display: inline-block; }
-        header .header-wrapper .menu-function #cart:hover {
-          color: #f17070;
-          text-decoration: none; }
+      header .header-wrapper .menu-function #cart:hover,
+      header .header-wrapper .menu-function #account:hover {
+        color: #f17070;
+        text-decoration: none; }
 
 /************************************
    Header mobile
 *************************************/
 header.mobile .header-wrapper .logo {
   white-space: no-wrap; }
+
+header.mobile .header-wrapper #logo-svg {
+  height: 27px; }
 
 header.mobile .header-wrapper .mobile-menu {
   display: block; }
@@ -891,7 +899,8 @@ footer {
     font-size: 14px;
     color: #a4a8b0;
     line-height: 20px;
-    display: block; }
+    display: block;
+    text-align: center;}
 
 /************************************
    Footer v2

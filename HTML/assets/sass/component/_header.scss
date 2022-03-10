@@ -15,6 +15,7 @@ header {
 		transition: .4s ease;
 		.logo {
 			display: inline-block;
+			height: 30;
 		}
 		.mobile-menu {
 			display: none;
@@ -139,7 +140,7 @@ header {
 			.social-contact {
 				display: inline-block;
 				a {
-					@include link-icon(16px,$title,1,$red);
+					/*@include link-icon(16px,$title,1,$red);*/
 					margin: 0 10px;
 					&:first-child {
 						margin-left: 0;
@@ -152,6 +153,12 @@ header {
 			#cart {
 				@include link-icon(16px,$title,1,$red);
 				display: inline-block;
+				margin: 0 10px;
+			}
+			#account {
+				@include link-icon(16px,$title,1,$red);
+				display: inline-block;
+				margin: 0 10px;
 			}
 		}
 	}
@@ -164,6 +171,7 @@ header.mobile {
 	.header-wrapper {
 		.logo {
 			white-space: no-wrap;
+			height: 23px;
 		}
 		.mobile-menu {
 			display: block;
