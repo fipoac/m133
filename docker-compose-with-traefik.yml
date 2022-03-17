@@ -1,5 +1,42 @@
 version: '3.8'
 services:
+  traefik:
+    image: "traefik:v2.6"
+    container_name: "traefik"
+    restart: unless-stopped
+    command:
+      - "--log.level=WARN"
+      - "--log.filePath=/var/log/traefik.log"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.watch=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.file.directory=/dynamic_config"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpChallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETS_ENCRYPT_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/cert/acme.json"
+    networks:
+      - traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./log:/var/log
+      - ./dynamic_config:/dynamic_config:ro
+      - ./cert:/cert
+      #- ./plugins-local:/plugins-local
+    environment:
+      LETS_ENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL}
+
   m133-web:
     container_name: m133-web
     build:
@@ -11,9 +48,6 @@ services:
       - m133-db
     volumes:
       - ./HTML/:/var/www/html/
-      #- /srv/testing/m133/conf/httpd/:/etc/apache2/
-      #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
-      #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
     networks:
       - traefik
       - backend
