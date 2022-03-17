@@ -13,7 +13,7 @@
 
   // Insert new hobby
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $txt_hobby = $_POST["txt_hobby";
+    $txt_hobby = $_POST['txt_hobby'];
     $sql = "INSERT INTO hobby (name) VALUES (?)";
     $stmt = $cnct_hobby->prepare($sql);
     $stmt->execute(array($txt_hobby));
