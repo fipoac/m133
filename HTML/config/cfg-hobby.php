@@ -1,7 +1,11 @@
 <?php
   // Connection to database
   try {
-    $cnct_hobby = new PDO("mysql:host=$_ENV['MYSQL_HOST'];dbname=$_ENV['MYSQL_DATABASE']", $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD']);
+    #$db_host = 
+    #$db_dbname = 
+    #$db_user = 
+    #$db_pw = 
+    $cnct_hobby = new PDO("mysql:host=" . $_ENV['MYSQL_HOST'] . ";dbname=" . $_ENV['MYSQL_DATABASE'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD']);
     // set the PDO error mode to exception
     $cnct_hobby->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Write logging here: echo "Connected successfully";
