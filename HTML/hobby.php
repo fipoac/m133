@@ -65,6 +65,12 @@
             <input name="txt_hobby" class="input-form" type="text" placeholder="Hier Hobby eingeben"><br>
             <input class="normal-btn" type="submit" value="Eintrag hinzuf&uuml;gen">
           </form>
+          <?php
+            foreach ($rslt_hobby as $val_hobby){
+              print_r($val_hobby);
+              echo "<br>";
+            }
+          ?>
         </div>
       </section><!--End hobby-db-->
       <footer>
