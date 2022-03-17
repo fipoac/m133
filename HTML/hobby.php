@@ -57,40 +57,15 @@
         </div>
       </header><!--End header-->
       <section class="hobby-db">
-          <div class="container">
-            <?php
-
-// The MySQL service named in the docker-compose.yml.
-$host = $_ENV['MYSQL_HOST'];
-
-// database user name
-$user = $_ENV['MYSQL_USER'];
-
-// database user password
-$pass = $_ENV['MYSQL_PASSWORD'];
-
-// database name
-$db = $_ENV['MYSQL_DATABASE'];
-
-try {
-  $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Connected successfully";
-  $sql = "CREATE TABLE IF NOT EXISTS hobby (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    hobby VARCHAR(30) NOT NULL
-    )";
-  $conn->exec($sql);
-  echo "Table MyGuests created successfully";
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-}
-
-
-            ?>
-
-          </div>
+        <div class="container">
+          <?php
+            require($_SERVER['DOCUMENT_ROOT'] . '/controller/ctrl-hobby.php');
+          ?>
+          <form action="/controller/ctrl-hobby.php" method="post">
+            <input name="txt_hobby" class="input-form" type="text" placeholder="Hier Hobby eingeben"><br>
+            <input class="normal-btn" type="submit" value="Eintrag hinzuf&uuml;gen">
+          </form>
+        </div>
       </section><!--End hobby-db-->
       <footer>
         <div class="container">
