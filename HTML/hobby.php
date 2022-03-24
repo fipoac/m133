@@ -1,3 +1,6 @@
+<?php
+  require($_SERVER['DOCUMENT_ROOT'] . '/include/_session.php');
+?>
 <!DOCTYPE html>
 <html lang="de">
   <head>
