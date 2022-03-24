@@ -59,6 +59,8 @@
       <section class="hobby-db">
         <div class="container">
           <?php
+            global $wp
+            $return_page = $_SERVER['DOCUMENT_ROOT'] . $wp->request;
             require($_SERVER['DOCUMENT_ROOT'] . '/controller/ctrl-hobby.php');
           ?>
           <form action="/controller/ctrl-hobby.php" method="post">
