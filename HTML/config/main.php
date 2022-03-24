@@ -1,3 +1,3 @@
 <?php
-  define('URL', "$_SERVER['SERVER_NAME']");
+  define("URL", $_SERVER['SERVER_NAME']);
 ?>
