@@ -59,7 +59,8 @@
       <section class="hobby-db">
         <div class="container">
           <?php
-            $return_page = $_SERVER['PHP_SELF'];
+            session_start();
+            $_SESSION['prev_page'] = $_SERVER['PHP_SELF'];
             require($_SERVER['DOCUMENT_ROOT'] . '/controller/ctrl-hobby.php');
           ?>
           <form action="/controller/ctrl-hobby.php" method="post">

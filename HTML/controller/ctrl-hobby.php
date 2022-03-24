@@ -17,6 +17,8 @@
     $sql = "INSERT INTO hobby (name) VALUES (?)";
     $stmt = $cnct_hobby->prepare($sql);
     $stmt->execute(array($txt_hobby));
-    header('Location: ' . URL . $return_page, TRUE, 201);
+    session_start();
+    $prev_page = $_SESSION['prev_page'];
+    header('Location: ' . URL . $prev_page, TRUE, 201);
   }
 ?>
