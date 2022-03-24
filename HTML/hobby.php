@@ -67,7 +67,7 @@
           </form>
           <?php
             foreach ($rslt_hobby as $val_hobby){
-              print_r($val_hobby);
+              print_r($val_hobby['name']);
               echo "<br>";
             }
           ?>

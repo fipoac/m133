@@ -7,7 +7,7 @@
     $sql = "SELECT * FROM hobby";
     $stmt = $cnct_hobby->prepare($sql);
     $stmt->execute();
-    //$rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $rslt_hobby = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $rslt_hobby = $stmt->fetchAll();
   }
 
