@@ -1,4 +1,6 @@
 <?php
+  require($_SERVER['DOCUMENT_ROOT'] . '/include/_session.php');
+  
   // Database connection
   require($_SERVER['DOCUMENT_ROOT'] . '/config/cfg-hobby.php');
   
