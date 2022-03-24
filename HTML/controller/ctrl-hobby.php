@@ -1,4 +1,7 @@
 <?php
+  // This should be solved differently (research session management)
+  session_start();
+  
   // Database connection
   require($_SERVER['DOCUMENT_ROOT'] . '/config/cfg-hobby.php');
   
@@ -17,7 +20,6 @@
     $sql = "INSERT INTO hobby (name) VALUES (?)";
     $stmt = $cnct_hobby->prepare($sql);
     $stmt->execute(array($txt_hobby));
-    session_start();
     $prev_page = $_SESSION['prev_page'];
     header('Location: ' . URL . $prev_page, TRUE, 201);
   }

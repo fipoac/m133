@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+  // This should be solved differently (research session management)
+  session_start();
+?>
 <html lang="de">
   <head>
     <title>Hobby DB Test - IT Shop</title>
@@ -57,9 +61,11 @@
         </div>
       </header><!--End header-->
       <section class="hobby-db">
+        <div>
+          <h2>Das ist eine Testseite, bei Nutzung der Datenbankverbindung werden Session Cookies benutzt</h2>
+        </div>
         <div class="container">
           <?php
-            session_start();
             $_SESSION['prev_page'] = $_SERVER['PHP_SELF'];
             require($_SERVER['DOCUMENT_ROOT'] . '/controller/ctrl-hobby.php');
           ?>
