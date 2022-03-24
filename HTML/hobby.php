@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<?php
-  // This should be solved differently (research session management)
-  session_start();
-?>
 <html lang="de">
   <head>
     <title>Hobby DB Test - IT Shop</title>
@@ -62,7 +58,7 @@
       </header><!--End header-->
       <section class="hobby-db">
         <div>
-          <h2>Das ist eine Testseite, bei Nutzung der Datenbankverbindung werden Session Cookies benutzt</h2>
+          <h4>Das ist eine Testseite, bei Nutzung der Datenbankverbindung werden Session Cookies benutzt</h4>
         </div>
         <div class="container">
           <?php

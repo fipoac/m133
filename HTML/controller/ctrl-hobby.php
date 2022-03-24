@@ -1,7 +1,4 @@
 <?php
-  // This should be solved differently (research session management)
-  session_start();
-  
   // Database connection
   require($_SERVER['DOCUMENT_ROOT'] . '/config/cfg-hobby.php');
   
