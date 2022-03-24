@@ -1,0 +1,11 @@
+<script src="assets/js/jquery-3.4.0.min.js"></script>
+<script src="assets/js/jquery-ui.min.js"></script>
+<script src="assets/js/slick.min.js"></script>
+<script src="assets/js/plyr.min.js"></script>
+<script src="assets/js/aos.js"></script>
+<script src="assets/js/jquery.scrollUp.min.js"></script>
+<script src="assets/js/masonry.pkgd.min.js"></script>
+<script src="assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="assets/js/numscroller-1.0.js"></script>
+<script src="assets/js/jquery.countdown.min.js"></script>
+<script src="assets/js/main.js"></script>
