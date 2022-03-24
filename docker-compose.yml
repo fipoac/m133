@@ -11,9 +11,9 @@ services:
       - m133-db
     volumes:
       - ./HTML/:/var/www/html/
-      #- /srv/testing/m133/conf/httpd/:/etc/apache2/
-      #- /srv/testing/m133/conf/php.ini:/usr/local/etc/php/php.ini
-      #- /srv/testing/m133-logs/httpd/:/var/log/apache2/
+      #- ./conf/httpd/:/etc/apache2/
+      #- ./conf/php.ini:/usr/local/etc/php/php.ini
+      #- ./log/httpd/:/var/log/apache2/
     networks:
       - traefik
       - backend
@@ -49,7 +49,7 @@ services:
     restart: always
     volumes:
       - "./data/mysql/:${MARIADB_DATA_DIR}"
-      - ./conf/mysql/:/etc/mysql/
+      - "./conf/mysql/:/etc/mysql/"
     networks:
       - backend
     expose:
