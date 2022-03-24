@@ -1,9 +1,14 @@
+<?php
+  // Temporary solution
+  require($_SERVER['DOCUMENT_ROOT'] . '/include/_session.php');
+?>
 <!DOCTYPE html>
 <html lang="de">
   <head>
     <title>
         <?php
-            echo "Hobby DB Test - IT Shop"
+            $site_desc = $_SESSION['site_desc'];
+            echo $site_desc . " - IT Shop";
         ?>
     </title>
     <meta charset="UTF-8">

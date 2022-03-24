@@ -20,7 +20,6 @@
     $stmt = $cnct_hobby->prepare($sql);
     $stmt->execute(array($txt_hobby));
     $prev_page = $_SESSION['prev_page'];
-    //var_dump($prev_page);
     header('Location: ' . $prev_page, TRUE, 302);
   }
 ?>
