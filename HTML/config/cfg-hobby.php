@@ -1,4 +1,7 @@
 <?php
+  // Side wide config
+  require($_SERVER['DOCUMENT_ROOT'] . '/config/main.php');
+
   // Connection to database
   try {
     $db_host = $_ENV['MYSQL_HOST'];
