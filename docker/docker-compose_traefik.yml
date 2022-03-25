@@ -76,6 +76,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_HOST: "m133-db"
+      WEBMASTER: ${WEBMASTER}
       FQDN: ${FQDN}
 
   m133-db:
