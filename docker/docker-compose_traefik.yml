@@ -1,0 +1,109 @@
+version: '3.9'
+services:
+  traefik:
+    image: "traefik:${TRAEFIK_VERSION}"
+    container_name: "traefik"
+    restart: unless-stopped
+    command:
+      - "--log.level=WARN"
+      - "--log.filePath=/var/log/traefik.log"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.watch=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.file.directory=/dynamic_config"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpChallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETS_ENCRYPT_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/cert/acme.json"
+    networks:
+      - traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "../srv_conf/traefik:/dynamic_config:ro"
+      - "../data/traefik/cert:/cert"
+      - "../data/log/traefik:/var/log"
+    environment:
+      LETS_ENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL}
+
+  m133-web:
+    container_name: m133-web
+    build:
+      context: ./build
+      dockerfile: dockerfile
+    restart: unless-stopped
+    depends_on:
+      - m133-db
+    volumes:
+      - "../html/:/var/www/html/:ro"
+      - "../srv_conf/nginx/:/etc/nginx/:ro"
+      - "../srv_conf/php/:/etc/php8/conf.d/:ro"
+      - "../srv_conf/php-fpm/:/etc/php8/php-fpm.d/:ro"
+      - "../data/log/nginx:/var/log/nginx"
+    networks:
+      - traefik
+      - backend
+    expose:
+      - "8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.m133-redirect.entrypoints=web"
+      - "traefik.http.routers.m133-redirect.rule=Host(`${FQDN}`)"
+      - "traefik.http.routers.m133-redirect.middlewares=https-redirect@file"      
+      - "traefik.http.routers.m133-redirect.service=noop@internal"
+      - "traefik.http.routers.m133.entrypoints=websecure"
+      - "traefik.http.routers.m133.rule=Host(`${FQDN}`)"
+      - "traefik.http.routers.m133.middlewares=secHeaders@file,m133-redirectregex"
+      - "traefik.http.routers.m133.service=m133"
+      - "traefik.http.routers.m133.tls=true"
+      - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
+      - "traefik.http.services.m133.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.middlewares.m133-redirectregex.redirectregex.regex=^https://([^\\\\/]+)/?$$"
+      - "traefik.http.middlewares.m133-redirectregex.redirectregex.replacement=https://$${1}/coming_soon.html"
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: "m133-db"
+      FQDN: ${FQDN}
+
+  m133-db:
+    container_name: m133-db
+    image: "mariadb:${MARIADB_VERSION}"
+    restart: always
+    volumes:
+      - "../data/db/:/var/lib/mysql/"
+      - "../data/log/mariadb/:/var/log/mariadb/"
+      - "../srv_conf/mariadb/:/etc/mysql/"
+    networks:
+      - backend
+    expose:
+      - "3306"
+    command:
+      - "--aria-log-dir-path=/var/log/mariadb/"
+      - "--datadir=/var/lib/mysql/"
+    environment:
+      TZ: "Europe/Zurich"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+networks:
+  traefik:
+    external: false
+    internal: false
+  backend:
+    external: false
+    internal: true

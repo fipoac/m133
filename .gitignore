@@ -1,5 +1,5 @@
 #/docker/.env
 /data/db/**
-/srv_conf/httpd/**
-/srv_conf/php/**
-/srv_conf/mariadb/**
+/data/log/traefik/**
+/data/log/nginx/**
+/data/traefik/cert/**
