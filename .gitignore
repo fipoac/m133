@@ -1,4 +1,4 @@
-#/docker/.env
+/docker/.env
 /data/db/**
 /data/log/traefik/**
 /data/log/nginx/**
