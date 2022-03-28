@@ -37,8 +37,8 @@ RUN mkdir /etc/sv/php-fpm \
     && mkdir /etc/sv/nginx
 
 # Copy run scripts to service dir
-COPY runit/php-fpm.sh /etc/sv/php-fpm/run
-COPY runit/nginx.sh /etc/sv/nginx/run
+COPY runit/php-fpm/run /etc/sv/php-fpm/
+COPY runit/nginx/run /etc/sv/nginx/
 
 # Activate services and make executable
 RUN ln -s /etc/sv/php-fpm /etc/service/ \
