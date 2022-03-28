@@ -65,7 +65,7 @@ services:
       - "traefik.http.routers.m133-redirect.service=noop@internal"
       - "traefik.http.routers.m133.entrypoints=websecure"
       - "traefik.http.routers.m133.rule=Host(`${FQDN}`)"
-      - "traefik.http.routers.m133.middlewares=secHeaders@file,m133-redirectregex"
+      - "traefik.http.routers.m133.middlewares=secHeaders@file,m133-blockhealth,m133-redirectregex"
       - "traefik.http.routers.m133.service=m133"
       - "traefik.http.routers.m133.tls=true"
       - "traefik.http.routers.m133.tls.certresolver=letsencrypt"
@@ -74,8 +74,11 @@ services:
       - "traefik.http.services.m133.loadbalancer.healthcheck.timeout=10s"
       - "traefik.http.services.m133.loadbalancer.server.port=80"
       - "traefik.docker.network=traefik"
-      - "traefik.http.middlewares.m133-redirectregex.redirectregex.regex=^https://([^\\\\/]+)/?$$"
-      - "traefik.http.middlewares.m133-redirectregex.redirectregex.replacement=https://$${1}/coming_soon.html"
+      - "traefik.http.middlewares.m133-blockhealth.redirectregex.permanent=true"
+      - "traefik.http.middlewares.m133-blockhealth.redirectregex.regex=^(https://[^\\\\/]+)/?(fpm-ping)/*$$"
+      - "traefik.http.middlewares.m133-blockhealth.redirectregex.replacement=$${1}"
+      - "traefik.http.middlewares.m133-redirectregex.redirectregex.regex=^(https://[^\\\\/]+)/*$$"
+      - "traefik.http.middlewares.m133-redirectregex.redirectregex.replacement=$${1}/coming_soon.html"
     environment:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
