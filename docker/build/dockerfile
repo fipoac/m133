@@ -1,7 +1,6 @@
 # strong inspiration by Tim de Pater <code@trafex.nl
 ARG ALPINE_VERSION=3.15
 FROM alpine:${ALPINE_VERSION}
-
 # Setup document root
 WORKDIR /var/www/html
 
@@ -29,22 +28,7 @@ RUN apk add --no-cache \
   php8-xml \
   php8-xmlreader \
   php8-zlib \
-  runit
-  #supervisor
-
-# Create runit services
-RUN mkdir /etc/sv/php-fpm \
-    && mkdir /etc/sv/nginx
-
-# Copy run scripts to service dir
-COPY runit/php-fpm/run /etc/sv/php-fpm/
-COPY runit/nginx/run /etc/sv/nginx/
-
-# Activate services and make executable
-RUN ln -s /etc/sv/php-fpm /etc/service/ \
-    && chmod +x /etc/sv/php-fpm/run \
-    && ln -s /etc/sv/nginx /etc/service/ \
-    && chmod +x /etc/sv/nginx/run
+  supervisor
 
 # Create symlink so programs depending on `php` still function
 RUN ln -s /usr/bin/php8 /usr/bin/php
@@ -62,6 +46,9 @@ RUN ln -s /usr/bin/php8 /usr/bin/php
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 
+# Switch to use a non-root user from here on
+USER nobody
+
 # Add application (commented because handled with docker-compose volume)
 #COPY --chown=nobody src/ /var/www/html/
 
@@ -69,13 +56,7 @@ RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 EXPOSE 80
 
 # Let supervisord start nginx & php-fpm
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
-# Let runit start nginx & php-fpm
-CMD ["runsvdir", "/etc/service"]
-
-# Switch to use a non-root user from here on
-USER nobody
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Configure a healthcheck to validate that everything is up&running
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/fpm-ping
