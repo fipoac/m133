@@ -85,14 +85,12 @@ services:
     restart: always
     volumes:
       - "../data/db/:/var/lib/mysql/"
-      - "../data/log/mariadb/:/var/log/mariadb/"
       - "../srv_conf/mariadb/:/etc/mysql/"
     networks:
       - backend
     expose:
       - "3306"
     command:
-      - "--aria-log-dir-path=/var/log/mariadb/"
       - "--datadir=/var/lib/mysql/"
     environment:
       TZ: "Europe/Zurich"
