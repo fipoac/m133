@@ -108,3 +108,4 @@ networks:
   backend:
     external: false
     internal: true
+    driver: bridge

@@ -6,6 +6,7 @@ Es erstellt mit docker compose zwei (bzw. drei) Docker Container auf welcher die
 ## Wichtige Hinweise
 - Wenn mit einem seperaten reverse proxy verwendet (docker-compose_web-only.yml) muss das Netzwerk "traefik" auf das Netzwerk des Proxys angepasst werden.
 - Beim integrierten Traefik proxy (docker-compose_traefik.yml) wird automatisch ein Netzwerk erstellt.
+- Einige Datei & Ordner Berechtigungen müssen wahrscheinlich angepasst werden
 - **Nicht vergessen LetsEncrypt Email in .env einzutragen.**
 
 ## Webseite starten
