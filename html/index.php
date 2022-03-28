@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'] . '/include/_session.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/cfg/_session.php');
 // declare vars (maybe temporary)
 $_SESSION['site_desc'] = "Home";
 
