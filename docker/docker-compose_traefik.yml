@@ -46,7 +46,7 @@ services:
       - m133-db
     volumes:
       - "../html/:/var/www/html/:ro"
-      - "../srv_conf/nginx/:/etc/nginx/:ro"
+      - "../srv_conf/nginx/:/etc/nginx/conf.d/:ro"
       - "../srv_conf/php/:/etc/php8/conf.d/:ro"
       - "../srv_conf/php-fpm/:/etc/php8/php-fpm.d/:ro"
       - "../srv_conf/supervisor/:/etc/supervisor/conf.d/:ro"
