@@ -23,11 +23,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.m133-redirect.entrypoints=web"
-      - "traefik.http.routers.m133-redirect.rule=Host(`$${FQDN}`)"
+      - "traefik.http.routers.m133-redirect.rule=Host(`${FQDN}`)"
       - "traefik.http.routers.m133-redirect.middlewares=https-redirect@file"      
       - "traefik.http.routers.m133-redirect.service=noop@internal"
       - "traefik.http.routers.m133.entrypoints=websecure"
-      - "traefik.http.routers.m133.rule=Host(`$${FQDN}`)"
+      - "traefik.http.routers.m133.rule=Host(`${FQDN}`)"
       - "traefik.http.routers.m133.middlewares=secHeaders@file,m133-redirectregex"
       - "traefik.http.routers.m133.service=m133"
       - "traefik.http.routers.m133.tls=true"
