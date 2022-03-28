@@ -28,10 +28,15 @@ RUN apk add --no-cache \
   php8-xml \
   php8-xmlreader \
   php8-zlib \
+  nodejs \
+  #yarn \
   supervisor
 
 # Create symlink so programs depending on `php` still function
 RUN ln -s /usr/bin/php8 /usr/bin/php
+
+# Install yarn
+#RUN yarn install
 
 # Configure nginx (commented because handled with docker-compose volume)
 #COPY config/nginx.conf /etc/nginx/nginx.conf

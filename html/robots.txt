@@ -1,0 +1,11 @@
+User-agent: * 
+Crawl-delay: 15
+Allow: /*.html$
+Allow: /*.php$
+Disallow: /assets/*
+Disallow: /cfg/*
+Disallow: /ctrl/*
+Disallow: /error-page/*
+Disallow: /views/*
+Disallow: /js/*
+Disallow: /css/*

@@ -43,6 +43,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_HOST: "m133-db"
       WEBMASTER: ${WEBMASTER}
+      WEB_AUTHOR: ${WEB_AUTHOR}
       FQDN: ${FQDN}
 
   m133-db:
