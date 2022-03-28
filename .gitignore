@@ -2,4 +2,5 @@
 /data/db/**
 /data/log/traefik/**
 /data/log/nginx/**
+/data/log/mariadb/**
 /data/traefik/cert/**
