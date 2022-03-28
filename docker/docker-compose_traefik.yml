@@ -51,6 +51,7 @@ services:
       - "../srv_conf/php-fpm/:/etc/php8/php-fpm.d/:ro"
       - "../srv_conf/supervisor/:/etc/supervisor/conf.d/:ro"
       - "../data/log/nginx:/var/log/nginx"
+      - "../data/upload/:/var/www/html/upload/"
     networks:
       - traefik
       - backend
