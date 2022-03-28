@@ -62,9 +62,6 @@ RUN ln -s /usr/bin/php8 /usr/bin/php
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 
-# Switch to use a non-root user from here on
-USER nobody
-
 # Add application (commented because handled with docker-compose volume)
 #COPY --chown=nobody src/ /var/www/html/
 
@@ -76,6 +73,9 @@ EXPOSE 80
 
 # Let runit start nginx & php-fpm
 CMD ["runsvdir", "/etc/service"]
+
+# Switch to use a non-root user from here on
+USER nobody
 
 # Configure a healthcheck to validate that everything is up&running
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/fpm-ping
