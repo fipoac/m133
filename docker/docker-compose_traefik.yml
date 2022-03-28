@@ -55,7 +55,7 @@ services:
       - traefik
       - backend
     expose:
-      - "8080"
+      - "80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.m133-redirect.entrypoints=web"
