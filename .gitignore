@@ -4,3 +4,4 @@
 /data/log/traefik/**
 /data/log/nginx/**
 /data/traefik/cert/**
+/html/upload/**
