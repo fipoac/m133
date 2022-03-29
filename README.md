@@ -6,6 +6,7 @@ Es erstellt mit docker compose zwei (bzw. drei) Docker Container auf welcher die
 ## Wichtige Hinweise
 - Wenn mit einem seperaten reverse proxy verwendet (docker-compose_web-only.yml) muss das Netzwerk "traefik" auf das Netzwerk des Proxys angepasst werden.
 - Beim integrierten Traefik proxy (docker-compose_traefik.yml) wird automatisch ein Netzwerk erstellt.
+- Es gibt für die Entwicklungsumgebung auf Windows eine Variante ohne Traefik, diese besitzt kein Health monitoring, load balancing oder SSL/TLS (docker-compose_local-only.yml).
 - Einige Datei & Ordner Berechtigungen müssen wahrscheinlich angepasst werden
 - **Nicht vergessen LetsEncrypt Email in .env einzutragen.**
 
@@ -15,4 +16,4 @@ Es erstellt mit docker compose zwei (bzw. drei) Docker Container auf welcher die
 3. git installieren
 4. Repo klonen
 5. .env anpassen
-6. Mit Befehl docker compose up -f {Pfad zur gewünschten docker-compose*.yml} -d (**Achtung:** man muss sich im gleichen Ordner wie die docker compose Dateien befinden, ansonsten funktionieren die relativen Pfade nicht.)
+6. Mit Befehl docker compose -p m133-project -f {Pfad zur gewünschten docker-compose*.yml} up -d (**Achtung:** man muss sich im gleichen Ordner wie die docker compose Dateien befinden, ansonsten funktionieren die relativen Pfade nicht. Der Parameter -p setzt den Projektnamen, der sonst der Name des Ordners (Docker) wäre.)

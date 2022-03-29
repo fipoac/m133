@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  m133-web:
+    container_name: m133-web
+    build:
+      context: ./build
+      dockerfile: dockerfile
+    restart: unless-stopped
+    depends_on:
+      - m133-db
+    volumes:
+      - "../html/:/var/www/html/:ro"
+      - "../srv_conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "../srv_conf/php/:/etc/php8/conf.d/:ro"
+      - "../srv_conf/php-fpm/:/etc/php8/php-fpm.d/:ro"
+      - "../srv_conf/supervisor/:/etc/supervisor/conf.d/:ro"
+      - "../data/log/nginx:/var/log/nginx"
+      - "../data/upload/:/var/www/html/upload/"
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: "m133-db"
+      WEBMASTER: ${WEBMASTER}
+      WEB_AUTHOR: ${WEB_AUTHOR}
+      FQDN: ${FQDN}
+
+  m133-db:
+    container_name: m133-db
+    image: "mariadb:${MARIADB_VERSION}"
+    restart: always
+    volumes:
+      - "../data/db/:/var/lib/mysql/"
+      - "../srv_conf/mariadb/:/etc/mysql/"
+    networks:
+      - backend
+    expose:
+      - "3306"
+    command:
+      - "--datadir=/var/lib/mysql/"
+    environment:
+      TZ: "Europe/Zurich"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+networks:
+  frontend:
+    external: false
+    internal: false
+  backend:
+    external: false
+    internal: true
+    driver: bridge
