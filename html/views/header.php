@@ -1,6 +1,6 @@
 <?php
-// Temporary solution
-require($_SERVER['DOCUMENT_ROOT'] . '/cfg/_session.php');
+    // Load prereqs
+    require($_SERVER['DOCUMENT_ROOT'] . '/cfg/1.php');
 ?>
 <!doctype html>
 <html class="no-js" lang="de" dir="ltr">
