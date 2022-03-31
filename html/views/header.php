@@ -49,21 +49,23 @@ require($_SERVER['DOCUMENT_ROOT'] . '/cfg/_session.php');
                             <a class="nav-link dropdown-toggle <?php if (in_array($_SERVER['SCRIPT_NAME'], ['/shop.php', '/shop/cart.php', '/shop/checkout.php'])) {echo 'active';} ?>"
                                 href="/shop.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false" title="Shop">Shop</a>
-                            <div class="dropdown-content">
-                                <a class="dropdown-item" href="/shop/cart.php" title="Zum Warenkorb">Warenkorb</a>
-                                <a class="dropdown-item" href="/shop/checkout.php" title="Zur Kasse">Kasse</a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/shop/cart.php" title="Zum Warenkorb">Warenkorb</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/shop/checkout.php" title="Zur Kasse">Kasse</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
-                </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
             </div>
         </nav>
     </header>
