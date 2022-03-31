@@ -7,5 +7,5 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/views/header.php');
 ?>
 <h1>TEST</h1>
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/views/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/views/footer.php');
 ?>
