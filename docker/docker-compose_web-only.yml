@@ -17,8 +17,8 @@ services:
       - "../data/log/nginx:/var/log/nginx"
       - "../data/upload/:/var/www/html/upload/"
     networks:
+#      - backend
       - traefik
-      - backend
     expose:
       - "80"
     labels:
@@ -60,7 +60,8 @@ services:
       - "../data/db/:/var/lib/mysql/"
       - "../srv_conf/mariadb/:/etc/mysql/"
     networks:
-      - backend
+      - traefik
+#      - backend
     expose:
       - "3306"
     command:
@@ -75,7 +76,7 @@ services:
 networks:
   traefik:
     external: true
-  backend:
-    external: false
-    internal: true
-    driver: bridge
+#  backend:
+#    external: false
+#    internal: true
+#    driver: bridge
