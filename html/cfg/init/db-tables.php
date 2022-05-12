@@ -2,16 +2,16 @@
     // Creation of table Products if not existant
     $sql = "CREATE TABLE IF NOT EXISTS `Products` (
         `Prod_ID` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        `ProdName` VARCHAR(30) NOT NULL UNIQUE,
+        `ProdName` VARCHAR(50) NOT NULL UNIQUE,
         `ProdPrice` INT NOT NULL
     )";
     $cnct_db->exec($sql);
     // Creation of table ProdProperties
     $sql = "CREATE TABLE IF NOT EXISTS `ProdProperties` (
         `Prop_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `PropName` VARCHAR(30) NOT NULL,
+        `PropName` VARCHAR(40) NOT NULL,
         `PropDesc` VARCHAR(50),
-        `PropVal` VARCHAR(30) NOT NULL
+        `PropVal` VARCHAR(150) NOT NULL
     )";
     $cnct_db->exec($sql);
     // Creation of table ProdPropRelations
@@ -26,9 +26,9 @@
     // Creation of table Accounts
     $sql = "CREATE TABLE IF NOT EXISTS `Accounts` (
         `Account_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `Username` VARCHAR(30) NOT NULL UNIQUE,
+        `Username` VARCHAR(50) NOT NULL UNIQUE,
         `Password` VARCHAR(255) NOT NULL,
-        `Email` VARCHAR(100) NOT NULL UNIQUE
+        `Email` VARCHAR(120) NOT NULL UNIQUE
     )";
     $cnct_db->exec($sql);
     // Creation of Product view
