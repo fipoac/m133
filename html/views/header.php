@@ -26,8 +26,18 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
 </head>
 
-<body>
+<body class="text-center">
     <header>
+        <?php 
+    if (!empty($_SESSION['recent_login']) && $_SESSION['recent_login'] && !empty($_SESSION['user_id'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show">
+        <strong>Anmelden erfolgreich</strong> <?php echo ' - Willkommen ' . $_SESSION['name'] . '!';?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php
+        unset($_SESSION['recent_login']);
+    }
+    ?>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
@@ -41,34 +51,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link <?php if ($_SERVER['SCRIPT_NAME'] == '/index.php') {echo 'active" aria-current="page"';} else {echo '"';} ?>
-                                href=" /index.php" title="Startseite">Startseite</a>
+                            <a class=<?php if ($_SERVER['SCRIPT_NAME'] == '/index.php') {echo '"nav-link active" aria-current="page"';} else {echo '"nav-link"';} ?>
+                                href='/index.php' title='Startseite'>Startseite</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if ($_SERVER['SCRIPT_NAME'] == '/about.php') {echo 'active" aria-current="page"';} else {echo '"';} ?>
-                                href=" /about.php" title="&Uuml;ber uns und Impressum">&Uuml;ber uns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($_SERVER['SCRIPT_NAME'], ['/shop.php', '/shop/cart.php', '/shop/checkout.php'])) {echo 'active" aria-current="page"';} else {echo '"';} ?> 
-                                href=" /shop.php" title="Zum Shop">Shop</a>
+                        <li class='nav-item'>
+                            <a class=<?php if ($_SERVER['SCRIPT_NAME'] == '/about.php') {echo '"nav-link active" aria-current="page"';} else {echo '"nav-link"';} ?>
+                                href='/about.php' title='&Uuml;ber uns und Impressum'>&Uuml;ber uns</a>
                         </li>
                         <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?php if (in_array($_SERVER['SCRIPT_NAME'], ['/shop.php', '/shop/cart.php', '/shop/checkout.php'])) {echo 'active" aria-current="page"';} else {echo '"';} ?>
-                                href="/shop.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" title="Shop">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/shop/cart.php" title="Zum Warenkorb">Warenkorb</a>
-                                </li>
-                                <li><a class="dropdown-item" href="/shop/checkout.php" title="Zur Kasse">Kasse</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                        <li class='nav-item'>
+                            <a class=<?php if (in_array($_SERVER['SCRIPT_NAME'], ['/shop.php', '/shop/cart.php', '/shop/checkout.php', '/product.php'])) {echo '"nav-link active" aria-current="page"';} else {echo '"nav-link"';} ?> href='/shop.php' title='Zum Shop'>Shop</a>
                         </li>
                         -->
+                        <li class='nav-item dropdown'>
+                            <a class=<?php if (in_array($_SERVER['SCRIPT_NAME'], ['/shop.php', '/shop/cart.php', '/shop/checkout.php', '/product.php'])) {echo '"nav-link dropdown-toggle active" aria-current="page"';} else {echo '"nav-link dropdown-toggle"';} ?>
+                                href='/shop.php' title='Zum Shop' id='navbarDropdown' role='button'
+                                data-bs-toggle='dropdown' aria-expanded="false">Shop</a>
+                            <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <li><a class='dropdown-item' href='/shop/cart.php' title='Zum Warenkorb'>Warenkorb</a>
+                                </li>
+                                <li><a class='dropdown-item disabled' href='/shop/checkout.php' title='Zur Kasse'>Kasse</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                     <!--
                     <form class="d-flex">
@@ -78,9 +83,13 @@
                     -->
                 </div>
                 <div class="col-md-3 text-end">
-                    <button type="button" title="Mein Benutzerkonto" class="btn btn-primary" style="padding-top:0;padding-bottom:0">
-                        <i style="padding-top:4px;font-size: 30px" class="las la-user"></i>
-                    </button>
+                    <!-- go to login.php if not already logged in, otherwise go to account.php -->
+                    <form action='/account.php' method="post">
+                        <button type="submit" title="Mein Benutzerkonto" class="btn btn-primary"
+                            style="padding-top:0;padding-bottom:0">
+                            <i style="padding-top:4px;font-size: 30px" class="las la-user"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </nav>

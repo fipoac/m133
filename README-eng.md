@@ -1,30 +1,28 @@
 [German](README.md) **[English](README-eng.md)**
 # Project TBZ Module 133
-***English translation coming soon***
----
-Dieses Repo beinhaltet das Projekt für das [ICT Modul 133 Web-Applikation mit Session-Handling realisieren](https://www.modulbaukasten.ch/module/133)
+This repo contains the project for the [ICT Module 133 Realize web application with session handling (in German)](https://www.modulbaukasten.ch/module/133)
 
-Es erstellt mit docker compose zwei (bzw. drei) Docker Container auf welcher diese Webseite läuft mit MariaDB Datenbank.
-Ab v0.5 mit kompletten Rewrite und nginx als Webserver anstatt Apache.
+It creates with docker compose two (or three) Docker containers on which this website runs with MariaDB database.
+From v0.5 with complete rewrite and nginx as webserver instead of Apache.
 
-## Wichtige Hinweise
-- Wenn mit einem seperaten reverse proxy verwendet (docker-compose_web-only.yml) muss das Netzwerk "traefik" auf das Netzwerk des Proxys angepasst werden.
-- Beim integrierten Traefik proxy (docker-compose_traefik.yml) wird automatisch ein Netzwerk erstellt.
-- Es gibt für die Entwicklungsumgebung auf Windows eine Variante ohne Traefik, diese besitzt kein Health monitoring, load balancing oder SSL/TLS (docker-compose_local-only.yml).
-- Einige Datei & Ordner Berechtigungen müssen wahrscheinlich angepasst werden
-- **Nicht vergessen LetsEncrypt Email in .env einzutragen. (Ausser local-only)**
+## Important notes
+- If used with a dedicated reverse proxy (docker-compose_web-only.yml) the network "traefik" must be adjusted to the network of the proxy.
+- With the integrated Traefik proxy (docker-compose_traefik.yml), a network is automatically created.
+- There is a variant without Traefik for a development environment on Windows which has no health monitoring, load balancing or SSL/TLS (docker-compose_local-only.yml).
+- Some file & folder permissions probably need to be adjusted
+- **Don't forget to add LetsEncrypt email to .env (Except local-only)**
 
-## Webseite starten
-1. Docker installieren [Beispiel Debian](https://docs.docker.com/engine/install/debian/) und Daemon starten
-2. [Docker compose v2 installieren](https://docs.docker.com/compose/cli-command/#installing-compose-v2)
-3. git installieren
-4. Repo klonen
-5. .env anpassen
-6. Mit Befehl ```
-   docker compose -p m133-project -f {Pfad zur gewünschten docker-compose*.yml} up -d ```
-   **Achtung:** man muss sich im gleichen Ordner wie die docker compose Dateien befinden, ansonsten funktionieren die relativen Pfade nicht. Der Parameter -p setzt den Projektnamen, der sonst der Name des Ordners (Docker) wäre.
+## Start website
+1. install Docker [example Debian](https://docs.docker.com/engine/install/debian/) and start daemon
+2. install [Docker compose v2](https://docs.docker.com/compose/cli-command/#installing-compose-v2)
+3. install git
+4. clone repo
+5. customize .env
+6. with command ```
+   docker compose -p m133-project -f {path to desired docker-compose*.yml} up -d ```
+   **Caution:** you have to be in the same folder as the docker compose files, otherwise the relative paths will not work. The -p parameter sets the project name, which would otherwise be the name of the directory (Docker).
 
-## Lokale Umgebung
-- Einfach Docker Desktop installieren
-  - In Einstellungen compose v2 aktivieren
-- Schritte 3-6 in [Webseite starten](#webseite-starten) durchführen
+## Local environment
+- Simply install Docker Desktop
+  - Enable compose v2 in settings
+- Perform steps 3-6 in [Start website](#start-website)

@@ -10,7 +10,7 @@ try {
     $db_dbname = $_ENV['MYSQL_DATABASE'];
     $db_user = $_ENV['MYSQL_USER'];
     $db_pw = $_ENV['MYSQL_PASSWORD'];
-    $cnct_hobby = new PDO("mysql:host=$db_host;dbname=$db_dbname", $db_user, $db_pw);
+    $cnct_db = new PDO("mysql:host=$db_host;dbname=$db_dbname", $db_user, $db_pw);
     unset($db_host,$db_dbname,$db_user,$db_pw);
   } catch(PDOException $e) {
     // Write error log here: 

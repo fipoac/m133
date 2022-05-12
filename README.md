@@ -26,3 +26,22 @@ Ab v0.5 mit kompletten Rewrite und nginx als Webserver anstatt Apache.
 - Einfach Docker Desktop installieren
   - In Einstellungen compose v2 aktivieren
 - Schritte 3-6 in [Webseite starten](#webseite-starten) durchführen
+
+## Information für die Lehrperson
+Folgende Anforderungen waren gegeben:
+1. Auf der Startseite sollen mindestens 10 Produkte mit Bild, Name und Preis in einer Übersicht angezeigt werden. Jedes Produkt soll einem Warenkorb beliebig oft hinzugefügt und temporär gespeichert werden können. Ein Filter und eine Sortierung sind optional.
+2. Der Warenkorb soll alle enthaltenen Produkte anzeigen und eine Möglichkeit bieten, einzelne Produkte wieder zu entfernen. Über ein Bestellformular sollen Benutzer ihre Adressdaten eingeben und die Produkte im Warenkorb bestellen können.
+3. Kunden sollen ein Benutzerkonto erstellen können und ihre Adressdaten für eine Bestellung speichern und bearbeiten können. Dafür muss sich ein Benutzer registrieren und anmelden können.
+4. Auf einer Kontaktseite sollen Benutzer eine Nachricht an das Startup senden können. Zudem sollen sämtliche Kontaktdaten des Unternehmens und die verantwortliche Person ersichtlich sein.
+5. Über eine Produktverwaltung sollen beliebig viele Produkte in einer Datenbank gespeichert werden können. Jedes Produkt soll über einen Namen, einen Preis und ein Bild verfügen. Bilder sollen als relative Links zur Datei gespeichert werden. Ein Passwortschutz ist optional.
+
+### *Bearbeitete Anforderungen*
+Aufgrund akuten Zeitmangels konnten diverse Anforderungen nicht durchgeführt werden. Der Fokus in diesem Produkt, wurde von mir persönlich, möglicherweise falsch, auf die erarbeitung von Grundwissen im gesamten Webentwicklungsbereich (ohne JS) gesetzt. Im Detail bedeutet dies, dass ich den gesamten Stack entwickeln wollte, von der Dockerumgebung über die Datenbankstruktur bis zur Dargestellten DOM. Somit fehlte die Zeit den Umfang der Arbeit vollständig zu erfüllen, in meiner persönlichen Meinung habe ich mit meiner Arbeit aber die gewünschte Tiefe, das geforderte Wissen erreicht und die Modulziele erreicht. \
+Die grafische Darstellung wird hier einiges zu wünschen übrig lassen, ist aber für meine bevorzugte Arbeitsweise nur Kosmetik, mit der ich mich persönlich nur nebenbei beschäftigen wollte. Deshalb wurde auch auf Bootstrap 5 gesetzt.
+* Anforderung 1. bzw. a) wurde bearbeitet, ohne optionale Filter
+* Anforderung 2. bzw. b) wurde bearbeitet, allerdings wurde die Bestellfunktionalität weggelassen
+* Anforderung 3. bzw. c) wurde bearbeitet, allerdings wurde die Postanschrift weggelassen (auch wegen des wegfallenden Bestellprozesses)
+* Anforderung 4. bzw. d) wurde nicht bearbeitet. Eine leere Seite in der Seitenstruktur existiert.
+* Anforderung 5. bzw. e) wurde bearbeitet, allerdings fehlt die Funktion Produkte im Webinterface einzutragen.
+
+### Abschliessende Gedanken zum Modul 133

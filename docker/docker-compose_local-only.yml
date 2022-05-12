@@ -20,7 +20,7 @@ services:
       - frontend
       - backend
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
