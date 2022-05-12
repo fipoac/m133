@@ -43,5 +43,3 @@ Die grafische Darstellung wird hier einiges zu wünschen übrig lassen, ist aber
 * Anforderung 3. bzw. c) wurde bearbeitet, allerdings wurde die Postanschrift weggelassen (auch wegen des wegfallenden Bestellprozesses)
 * Anforderung 4. bzw. d) wurde nicht bearbeitet. Eine leere Seite in der Seitenstruktur existiert.
 * Anforderung 5. bzw. e) wurde bearbeitet, allerdings fehlt die Funktion Produkte im Webinterface einzutragen.
-
-### Abschliessende Gedanken zum Modul 133
